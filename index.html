@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Per-Note ADSR String Sampler (Loop + Reverb)</title>
+<style>
+  body { font-family:sans-serif; text-align:center; }
+  #keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.key {
+    width: 70px;
+    height: 160px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 12px;
+    cursor: pointer;
+
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    transition: background .1s;
+}
+
+.key:hover {
+    background: #f0f0f0;
+}
+
+.key:active {
+    background: #ddd;
+}
+  
+</style>
+</head>
+<body>
+
+<h1>🎻 Per-Note ADSR String Sampler (Loop + Reverb) 🎻</h1>
+<button onclick="startSequencer()">Start</button>
+<button onclick="stopSequencer()">Stop</button>
+<div id="keyboard"></div>
+<script  type="module" src="./index.js" ></script>
+</body>
+</html>
+ 

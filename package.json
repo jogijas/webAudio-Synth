@@ -1,0 +1,35 @@
+{
+  "name": "@jogijas/webAudio-Synth",
+  "version": "1.0.0",
+  "description": "A standalone Web Audio sequencer web app.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "encode": "node encode.cjs ./mp3 list.txt samples.js",
+    "bundle": "esbuild index.js --bundle --minify --outfile=demo/bundle.js --format=iife",
+    "build": "npm run encode && npm run bundle"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "webaudio",
+    "sequencer",
+    "audio-context",
+    "convolver"
+  ],
+  "author": "Joginde Jasrotia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jogijas/webAudio-Synth"
+  },
+  "bugs": {
+    "url": "https://github.com/jogijas/webAudio-Synth"
+  },
+  "homepage": "https://github.com/jogijas/webAudio-Synth#README.md",
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "dependencies": {}
+}
