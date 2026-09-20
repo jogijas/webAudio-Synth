@@ -31,12 +31,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jogijas/webaudio-synth"
+    "url": "https://github.com/jogijas/webaudio-synth"
   },
   "bugs": {
-    "url": "git+https://github.com/jogijas/webaudio-synth/issues"
+    "url": "https://github.com/jogijas/webaudio-synth/issues"
   },
-  "homepage": "git+https://github.com/jogijas/webaudio-synth#readme",
+  "homepage": "https://github.com/jogijas/webaudio-synth#readme",
   "dependencies": {},
   "devDependencies": {}
 }
