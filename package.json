@@ -1,5 +1,5 @@
 {
-  "name": "@jogijas/webAudio-Synth",
+  "name": "@jogijas/webaudio-synth",
   "version": "1.0.0",
   "description": "A standalone Web Audio sequencer web app.",
   "main": "index.js",
@@ -12,6 +12,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "index.js",
+    "reverb.js",
+    "encode.cjs",
+    "list.txt",
+    "pattern.json",
+    "mp3/",
+    "demo/",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "webaudio",
     "sequencer",
@@ -22,14 +33,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com"
+    "url": "git+https://github.com/jogijas/webaudio-synth"
   },
   "bugs": {
-    "url": "https://github.com"
+    "url": "git+https://github.com/jogijas/webaudio-synth/issues"
   },
-  "homepage": "https://github.com",
-  "devDependencies": {
+  "homepage": "git+https://github.com/jogijas/webaudio-synth#readme",
+  "dependencies": {
     "esbuild": "^0.25.0"
   },
-  "dependencies": {}
+  "devDependencies": {}
 }

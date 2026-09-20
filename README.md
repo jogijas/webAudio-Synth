@@ -1,4 +1,4 @@
-# webAudio-Synth
+# webaudio-synth.
 
 A lightweight, high-performance **Web Audio API Step Sequencer and Synthesizer** built with plain vanilla JavaScript. This project is configured to bundle into a completely **standalone, serverless distribution** that runs smoothly directly from local storage (`file://` protocol) without encountering CORS issues.
 
@@ -24,7 +24,6 @@ A lightweight, high-performance **Web Audio API Step Sequencer and Synthesizer**
 
 ```text
 ├── encode.js      # Main encoder for mp3 files to soundfont file
-├── index.html     # Main UI markup with integrated asset styling hooks
 ├── index.js       # Audio engine core, step sequencer scheduler, and UI controller
 ├── LICENSE        # MIT License file
 ├── list.txt       # List file for ordering seqencer notes.
@@ -47,24 +46,95 @@ Ensure you have [Node.js](https://nodejs.org/) installed on your machine to mana
 ### 1. Installation
 
 ```bash
-npm install @jogijas/webAudio-Synth
+npm install @jogijas/webaudio-synth.
 ```
 
 ### 2. Compiling the Production Bundle
-To resolve the import statements and generate a client-safe codebase optimized for local execution, use the following compilation string:
+To resolve the import statements and generate a client-safe codebase optimized for local execution, run the following cmd only for first time after install:
+
 
 ```bash
+cd node_modules/@jogijas/webaudio-synth
 npm run build
  ```
-
+ It will generate samples.js soundfonts from mp3 files
+ and standalone bundle.js in demo folder.
+ 
 ### 3. Execution
 Once compiled, you can interact with the sequencer in two different ways:
 
-**Serverless**: Simply double-click your local `demo/demo.html` file to run the project over the `file://` protocol.
+**Serverless**: Simply double-click your local
 
-**Local Dev Server**: Launch a lightweight service wrapper (e.g., `npx serve . -l 5000` or VS Code Live Server extension) to preview over `http://localhost`.
+```text
+node_modules/@jogijas/webaudio-synthdemo/demo.html
+```
+file to run the project over the `file://` protocol.Copy demo foler any where and use.
+
+### Local Dev Server:
+**Create index.html file and copy to it the following code:**
+
+```text
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webaudio Synth Test</title>
+<style>
+body { font-family:sans-serif; text-align:center; }
+
+#keyboard {
+        display: flex;
+        gap: 5px;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+.key { padding: 20px; border: 1px solid #000;
+    cursor: pointer; user-select: none;height: 160px; }
+.key.active { background-color: #ddd; }
+</style>
+</head>
+<body>
+    <h1>Testing webaudio-synth</h1>
+    <button id="startBtn">Start Sequencer Engine</button>
+    <button id="stopBtn">Stop Sequencer Engine</button>
+<!-- Required visual container hook for
+   your script's renderKeyboard() -->
+    <div id="keyboard"></div>
+    <script type="module" src="main.js">
+</script>
+</body>
+</html>
+
+```
+**Create main.js file and copy to it the following code:**
+
+```javascript
+import WebAudioSynth
+from './node_modules/@jogijas/webaudio-synth/index.js';
+
+document
+.getElementById('startBtn')
+.addEventListener('click', async () => {
+console.log("Initializing and playing audio sequencer...");
+await WebAudioSynth.start();
+});
+
+document.getElementById('stopBtn')
+.addEventListener('click', () => {
+console.log("Stopping audio sequencer...");
+WebAudioSynth.stop();
+});
+```
+Launch a lightweight service wrapper (e.g., `npx serve . -l 5000` or VS Code Live Server extension) to preview over `http://localhost:`.
 
 ---
+### To generate server Serverless standalone edit your project package.json to include:
+```text
+"scripts": {
+"build":"esbuild main.js --bundle --minify --outfile=bundle.js --format=iife"
+    },
+```
 
 ## ⚙️ Audio Architecture Details
 

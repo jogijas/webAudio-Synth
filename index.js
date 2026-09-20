@@ -330,6 +330,25 @@ function renderKeyboard() {
         keyboard.appendChild(key);
     });
 }
-renderKeyboard();
-window.startSequencer = startSequencer;
-window.stopSequencer = stopSequencer;
+//renderKeyboard();
+//window.startSequencer = startSequencer;
+//window.stopSequencer = stopSequencer;
+// ======================================================
+// INITIALIZATION & EXPORTS
+// ======================================================
+
+// Safely execute DOM rendering only if running in a browser environment with a UI container present
+if (typeof document !== 'undefined') {
+    const keyboardContainer = document.getElementById("keyboard");
+    if (keyboardContainer) {
+        renderKeyboard();
+    }
+}
+
+// Modern ES Module Default Export
+export default {
+    start: startSequencer,
+    stop: stopSequencer,
+    ensureAudio: ensureAudioReady,
+    loadInstruments
+};
