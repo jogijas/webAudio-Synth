@@ -1,6 +1,6 @@
 {
   "name": "@jogijas/webaudio-synth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A standalone Web Audio sequencer web app.",
   "main": "index.js",
   "type": "module",
