@@ -1,13 +1,11 @@
 {
   "name": "@jogijas/webaudio-synth",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A standalone Web Audio sequencer web app.",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "encode": "node encode.cjs ./mp3 list.txt samples.js",
-    "bundle": "esbuild index.js --bundle --minify --outfile=demo/bundle.js --format=iife",
-    "build": "npm run encode && npm run bundle"
+    "encode": "node encode.cjs ./mp3 list.txt samples.js"
   },
   "publishConfig": {
     "access": "public"
@@ -16,10 +14,10 @@
     "index.js",
     "reverb.js",
     "encode.cjs",
+    "samples.js",
     "list.txt",
     "pattern.json",
     "mp3/",
-    "demo/",
     "README.md",
     "LICENSE"
   ],
@@ -39,8 +37,6 @@
     "url": "git+https://github.com/jogijas/webaudio-synth/issues"
   },
   "homepage": "git+https://github.com/jogijas/webaudio-synth#readme",
-  "dependencies": {
-    "esbuild": "^0.25.0"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

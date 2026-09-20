@@ -1,6 +1,6 @@
-# webaudio-synth.
+# @jogijas/webaudio-synth
 
-A lightweight, high-performance **Web Audio API Step Sequencer and Synthesizer** built with plain vanilla JavaScript. This project is configured to bundle into a completely **standalone, serverless distribution** that runs smoothly directly from local storage (`file://` protocol) without encountering CORS issues.
+A lightweight, high-performance **Web Audio API Step Sequencer and Synthesizer** built with plain vanilla JavaScript. This project is configured as a pure ES Module distribution that can easily be compiled into a completely **standalone, serverless web app** running directly from local storage (`file://` protocol) without encountering CORS issues.
 
 ## 🚀 Features
 
@@ -14,127 +14,135 @@ A lightweight, high-performance **Web Audio API Step Sequencer and Synthesizer**
 
 ## 🛠️ Tech Stack & Tooling
 
-- **Language**: Vanilla JavaScript (ES6+)
+- **Language**: Vanilla JavaScript (ES6+ ES Modules)
 - **Audio Core**: HTML5 Web Audio API (`AudioContext`, `ConvolverNode`, `GainNode`)
-- **Bundler**: [esbuild](https://esbuild.github.io/) (Used for high-speed module resolution and dependency inlining)
+- **Optional Bundler**: [esbuild](https://github.io) (Can be used by consumers for high-speed module resolution and asset inlining)
 
 ---
 
 ## 📦 Project Structure
 
 ```text
-├── encode.js      # Main encoder for mp3 files to soundfont file
-├── index.js       # Audio engine core, step sequencer scheduler, and UI controller
-├── LICENSE        # MIT License file
-├── list.txt       # List file for ordering seqencer notes.
-├── package.json   # Local developer scripts and dependency configurations
-├── pattern.json   # Paettern of sequence play
-├── README.md      # README file for project.
-├── reverb.js      # Base64 encoded impulse response audio for reverb
-├── demo/ demo.html 
-└── mp3/ mp3 files
-    
+├── encode.cjs     # Main encoder utility converting mp3 files to base64 soundfont structures.
+├── index.js       # Audio engine core, step sequencer scheduler, and UI controller (Default Export).
+├── LICENSE        # MIT License file.
+├── list.txt       # List file for ordering sequencer notes.
+├── package.json   # Local registry scripts and dependency configurations.
+├── pattern.json   # Base configuration pattern for sequence play.
+├── README.md      # Project documentation layout.
+├── reverb.js      # Base64 encoded impulse response audio for premium convolution spatial acoustics.
+├── samples.js     # Generated asset file containing Base64 encoded audio strings.
+└── mp3/           # Folder containing the source raw .mp3 audio clips.
 ```
 
 ---
 
-## 💻 Local Setup & Compilation
+## 💻 Local Setup & Execution
 
 ### Prerequisites
-Ensure you have [Node.js](https://nodejs.org/) installed on your machine to manage standard compiler tooling.
+Ensure you have [Node.js](https://nodejs.org) installed on your machine to manage standard compiler tooling.
 
 ### 1. Installation
 
 ```bash
-npm install @jogijas/webaudio-synth.
+npm install @jogijas/webaudio-synth
 ```
 
-### 2. Compiling the Production Bundle
-To resolve the import statements and generate a client-safe codebase optimized for local execution, run the following cmd only for first time after install:
-
+### 2. Compiling the Audio Assets
+To compile your own audio clips for this engine, place your customized `.mp3` files inside the `mp3/` directory, update the `list.txt` file layout to match, and execute the internal encoder script:
 
 ```bash
 cd node_modules/@jogijas/webaudio-synth
-npm run build
- ```
- It will generate samples.js soundfonts from mp3 files
- and standalone bundle.js in demo folder.
- 
-### 3. Execution
-Once compiled, you can interact with the sequencer in two different ways:
-
-**Serverless**: Simply double-click your local
-
-```text
-node_modules/@jogijas/webaudio-synthdemo/demo.html
+npm run encode
 ```
-file to run the project over the `file://` protocol.Copy demo foler any where and use.
+This utility automatically reads your sound files and generates the modern embedded `samples.js` file mapping layer.
 
-### Local Dev Server:
-**Create index.html file and copy to it the following code:**
+### 3. Local Execution Example
 
-```text
+To test the package locally on your web application layout, establish these two root file configurations inside your workspace:
+
+#### Create an `index.html` file:
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Webaudio Synth Test</title>
-<style>
-body { font-family:sans-serif; text-align:center; }
-
-#keyboard {
-        display: flex;
-        gap: 5px;
-        margin-top: 20px;
-        align-items: center;
-        justify-content: center;
-    }
-.key { padding: 20px; border: 1px solid #000;
-    cursor: pointer; user-select: none;height: 160px; }
-.key.active { background-color: #ddd; }
-</style>
+    <style>
+        body { font-family: sans-serif; text-align: center; }
+        #keyboard {
+            display: flex;
+            gap: 5px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        .key { 
+            padding: 20px; border: 1px solid #000;
+            cursor: pointer; user-select: none; height: 160px; 
+        }
+        .key.active { background-color: #ddd; }
+    </style>
 </head>
 <body>
     <h1>Testing webaudio-synth</h1>
     <button id="startBtn">Start Sequencer Engine</button>
     <button id="stopBtn">Stop Sequencer Engine</button>
-<!-- Required visual container hook for
-   your script's renderKeyboard() -->
+
+    <!-- Required visual container hook for the script's renderKeyboard() engine -->
     <div id="keyboard"></div>
-    <script type="module" src="main.js">
-</script>
+    
+    <!-- Required hidden input hook for master audio gain routing control mapping -->
+    <input type="range" id="masterGain" min="0" max="5" step="0.1" value="4" style="display:none;">
+
+    <!-- Main Module Application Router Entry Point -->
+    <script type="module" src="main.js"></script>
 </body>
 </html>
-
 ```
-**Create main.js file and copy to it the following code:**
 
+#### Create a `main.js` file:
 ```javascript
-import WebAudioSynth
-from './node_modules/@jogijas/webaudio-synth/index.js';
+import WebAudioSynth from './node_modules/@jogijas/webaudio-synth/index.js';
 
-document
-.getElementById('startBtn')
-.addEventListener('click', async () => {
-console.log("Initializing and playing audio sequencer...");
-await WebAudioSynth.start();
+document.getElementById('startBtn').addEventListener('click', async () => {
+    console.log("Initializing and playing audio sequencer...");
+    await WebAudioSynth.start();
 });
 
-document.getElementById('stopBtn')
-.addEventListener('click', () => {
-console.log("Stopping audio sequencer...");
-WebAudioSynth.stop();
+document.getElementById('stopBtn').addEventListener('click', () => {
+    console.log("Stopping audio sequencer...");
+    WebAudioSynth.stop();
 });
 ```
-Launch a lightweight service wrapper (e.g., `npx serve . -l 5000` or VS Code Live Server extension) to preview over `http://localhost:`.
+
+Launch a lightweight development service wrapper (e.g., run `npx serve .` or click the VS Code Live Server extension hook) to securely preview the application over your local address network.
 
 ---
-### To generate server Serverless standalone edit your project package.json to include:
-```text
-"scripts": {
-"build":"esbuild main.js --bundle --minify --outfile=bundle.js --format=iife"
-    },
+
+## 🛠️ Optional: Generating a Serverless Standalone App
+
+If you want to package this entire framework down into a single standalone application code file that can run locally using the `file://` protocol without a server, add `esbuild` to your application workspace:
+
+```bash
+npm install esbuild
 ```
+
+Add this build task configuration property directly inside your root `package.json` file:
+
+```json
+"scripts": {
+    "build": "esbuild main.js --bundle --minify --outfile=bundle.js --format=iife"
+}
+```
+
+Execute the bundling pipeline layout command:
+```bash
+npm run build
+```
+You can now update your `index.html` file to replace `<script type="module" src="main.js"></script>` with a standard scripts declaration `<script src="bundle.js"></script>` to open it directly off your computer without any CORS security constraints!
+
+---
 
 ## ⚙️ Audio Architecture Details
 
