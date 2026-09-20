@@ -18,16 +18,16 @@
     "audio-context",
     "convolver"
   ],
-  "author": "Joginde Jasrotia",
+  "author": "Joginder Jasrotia",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jogijas/webAudio-Synth"
+    "url": "https://github.com"
   },
   "bugs": {
-    "url": "https://github.com/jogijas/webAudio-Synth"
+    "url": "https://github.com"
   },
-  "homepage": "https://github.com/jogijas/webAudio-Synth#README.md",
+  "homepage": "https://github.com",
   "devDependencies": {
     "esbuild": "^0.25.0"
   },
